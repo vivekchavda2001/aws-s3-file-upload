@@ -23,6 +23,7 @@ console.log(bucketName,bucketRegion)
     }
     return s3.upload(uploadParams).promise() // will upload file to S3
 }
+
 //Downlaod File from S3 bucket
 const getFileStream = (fileKey)=>{
     const downloadParams = {
@@ -32,7 +33,14 @@ const getFileStream = (fileKey)=>{
     return s3.getObject(downloadParams).createReadStream();
 }
 
+//Downlaod File from S3 bucket
+const deleteFileStream = (fileKey)=>{
+    const deleteParams = {
+        Key: fileKey,
+        Bucket: bucketName
+    }
+    return s3.deleteObject(deleteParams).promise() // will delete
+}
 
 
-
-module.exports = {fileUpload,getFileStream}
+module.exports = {fileUpload,getFileStream,deleteFileStream}
